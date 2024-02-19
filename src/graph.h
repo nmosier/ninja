@@ -188,7 +188,7 @@ struct Edge {
         id_(0), outputs_ready_(false), deps_loaded_(false),
         deps_missing_(false), generated_by_dep_loader_(false),
         command_start_time_(0), implicit_deps_(0), order_only_deps_(0),
-        implicit_outs_(0) {}
+        implicit_outs_(0), weight_(1) {}
 
   /// Return true if all inputs' in-edges are ready.
   bool AllInputsReady() const;
@@ -228,10 +228,11 @@ struct Edge {
   bool deps_missing_;
   bool generated_by_dep_loader_;
   TimeStamp command_start_time_;
+  int weight_;
 
   const Rule& rule() const { return *rule_; }
   Pool* pool() const { return pool_; }
-  int weight() const { return 1; }
+  int weight() const { return weight_; }
   bool outputs_ready() const { return outputs_ready_; }
 
   // There are three types of inputs.

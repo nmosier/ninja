@@ -329,6 +329,11 @@ bool ManifestParser::ParseEdge(string* err) {
     edge->pool_ = pool;
   }
 
+  string weight = edge->GetBinding("weight");
+  if (!weight.empty()) {
+    edge->weight_ = std::stoi(weight);
+  }
+
   edge->outputs_.reserve(outs.size());
   for (size_t i = 0, e = outs.size(); i != e; ++i) {
     string path = outs[i].Evaluate(env);
