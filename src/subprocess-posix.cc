@@ -117,8 +117,8 @@ bool Subprocess::Start(SubprocessSet* set, const string& command) {
   if (err != 0)
     Fatal("posix_spawnattr_setflags: %s", strerror(err));
 
-  const char* spawned_args[] = { "/bin/sh", "-c", command.c_str(), NULL };
-  err = posix_spawn(&pid_, "/bin/sh", &action, &attr,
+  const char* spawned_args[] = { "/bin/bash", "-c", command.c_str(), NULL };
+  err = posix_spawn(&pid_, "/bin/bash", &action, &attr,
         const_cast<char**>(spawned_args), environ);
   if (err != 0)
     Fatal("posix_spawn: %s", strerror(err));
